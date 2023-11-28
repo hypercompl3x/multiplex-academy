@@ -3,8 +3,8 @@
 	import Logo from '$lib/components/svgs/Logo.svelte'
 </script>
 
-<div class="h-screen flex flex-row">
-	<div class="h-full sm:max-w-xl w-full flex flex-col items-center justify-center gap-y-4">
+<div class="flex flex-row h-screen">
+	<div class="flex flex-col items-center justify-center w-full h-full sm:max-w-xl gap-y-8">
 		<Logo />
 		<slot />
 	</div>

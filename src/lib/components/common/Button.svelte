@@ -1,10 +1,19 @@
 <script lang="ts">
+	import type { HTMLButtonAttributes } from 'svelte/elements'
+	import Spinner from './Spinner.svelte'
+
 	type Props = {
 		label: string
-	}
-	let { label } = $props<Props>()
+		submitting?: boolean
+	} & HTMLButtonAttributes
+
+	let { label, submitting = false } = $props<Props>()
 </script>
 
-<button class="bg-blue-dark text-white font-semibold text-xl w-64 h-10 rounded-md" onclick={() => {}}>
-	{label}
+<button class="flex items-center justify-center h-10 text-xl font-semibold text-white rounded-md bg-blue-dark w-72">
+	{#if submitting}
+		<Spinner />
+	{:else}
+		{label}
+	{/if}
 </button>

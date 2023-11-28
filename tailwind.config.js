@@ -14,6 +14,9 @@ export default {
       },
       orange: {
         main: "#E8B94D"
+      },
+      red: {
+        main: "#C73636"
       }
     }
   },

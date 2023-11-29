@@ -1,8 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { setError, superValidate } from 'sveltekit-superforms/server';
 import { forgotPasswordSchema } from '$lib/form/schemas';
 import type { PageServerLoad } from './$types.js';
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '$lib/constants/constants.js';
+import { ERROR_MESSAGES } from '$lib/constants/constants.js';
 
 const { AUTH, GENERIC } = ERROR_MESSAGES
 
@@ -16,7 +16,8 @@ export const load: PageServerLoad = (async ({ locals }) => {
 });
 
 export const actions = {
-  default: async ({ request, locals }) => {
+  default: async (event) => {
+    const { request, locals } = event
     const form = await superValidate(request, forgotPasswordSchema);
 
     if (!form.valid) {
@@ -38,6 +39,6 @@ export const actions = {
       return setError(form, "email", GENERIC)
     }
 
-    return setMessage(form, SUCCESS_MESSAGES.AUTH.PASSWORD.RESET);
+    return { form }
   }
 };

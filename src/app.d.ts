@@ -5,8 +5,8 @@ declare global {
     interface Locals {
       pb: PocketBase
     }
-    // interface Error {}
     // interface PageData {}
+    // interface Error {}
     // interface Platform {}
   }
 }

@@ -1,14 +1,37 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition'
 	import { superForm } from 'sveltekit-superforms/client'
 	import Button from '$lib/components/common/Button.svelte'
 	import Input from '$lib/components/common/Input.svelte'
 	import PasswordInput from '$lib/components/common/PasswordInput.svelte'
+	import { message } from '$lib/state/runes.svelte'
+	import { untrack } from 'svelte'
+	import X from '$lib/components/svgs/X.svelte'
 
 	let { data } = $props()
 
 	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
+
+	$effect(() => {
+		untrack(() => {
+			setTimeout(() => {
+				message.remove()
+			}, 3500)
+		})
+
+		return () => message.remove()
+	})
 </script>
 
+{#if message.value}
+	<div
+		transition:fade={{ duration: 300 }}
+		class="absolute flex flex-row items-center p-2 rounded-md bg-green-light/20 -top-12 whitespace-nowrap gap-x-2"
+	>
+		<div class="text-lg text-green-main">{message.value}</div>
+		<button type="button" class="w-3.5" onclick={() => message.remove()}><X /></button>
+	</div>
+{/if}
 <form method="POST" use:enhance novalidate>
 	<div class="space-y-6">
 		<Input name="email" label="Email" bind:value={$form.email} error={$errors.email?.[0]} {...$constraints.email} />

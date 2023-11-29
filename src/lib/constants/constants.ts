@@ -27,9 +27,8 @@ export const ERROR_MESSAGES = {
 
 export const SUCCESS_MESSAGES = {
 	AUTH: {
-		PASSWORD: {
-			RESET: "An email has been sent to reset your password"
-		}
+		NEW_ACCOUNT: "Confirm your email before logging in",
+		PASSWORD_REST: "An email has been sent to reset your password"
 	}
 }
 

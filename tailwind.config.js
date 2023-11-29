@@ -19,7 +19,8 @@ export default {
       },
       green: {
         main: "#5DB67B",
-        dark: "#306943"
+        dark: "#306943",
+        light: "#87C99E"
       }
     }
   },

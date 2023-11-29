@@ -1,13 +1,22 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import { superForm } from 'sveltekit-superforms/client'
 	import Button from '$lib/components/common/Button.svelte'
 	import Input from '$lib/components/common/Input.svelte'
 	import PasswordInput from '$lib/components/common/PasswordInput.svelte'
+	import { message } from '$lib/state/runes.svelte'
+	import { SUCCESS_MESSAGES } from '$lib/constants/constants'
 
 	let { data } = $props()
 
 	const { form, errors, constraints, enhance, submitting } = superForm(data.form, {
 		taintedMessage: null,
+		onUpdated({ form }) {
+			if (form.valid) {
+				message.value = SUCCESS_MESSAGES.AUTH.NEW_ACCOUNT
+				goto('/login')
+			}
+		},
 	})
 </script>
 

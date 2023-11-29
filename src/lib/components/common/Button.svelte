@@ -10,6 +10,7 @@
 		ice: 'bg-ice-main',
 		green: 'bg-green-main',
 		darkgreen: 'bg-green-dark',
+		lightgreen: 'bg-green-light',
 	}
 
 	type Props = {

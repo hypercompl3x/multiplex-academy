@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements'
 	import ErrorBlock from './ErrorBlock.svelte'
-	import Icon from './Icon.svelte'
 	import { INPUT_STYLES } from '../../constants/stylingConstants'
+	import Eye from '../svgs/Eye.svelte'
+	import SlashedEye from '../svgs/SlashedEye.svelte'
 
 	const { BASE, BORDER_BASE, BORDER_ERROR } = INPUT_STYLES
 
@@ -36,7 +37,11 @@
 			/>
 		{/if}
 		<button type="button" class="absolute inset-y-0 w-6 my-auto right-3" on:click={onEyeClick}>
-			<Icon icon={passwordVisible ? 'eye' : 'slashedEye'} />
+			{#if passwordVisible}
+				<Eye />
+			{:else}
+				<SlashedEye />
+			{/if}
 		</button>
 	</div>
 	<ErrorBlock {error} />

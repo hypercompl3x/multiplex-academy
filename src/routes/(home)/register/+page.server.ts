@@ -16,14 +16,15 @@ export const load: PageServerLoad = (async ({locals}) => {
 });
 
 export const actions = {
-  default: async ({ request, locals }) => {
+  default: async (event) => {
+    const { request, locals } = event
     const form = await superValidate(request, registerUserSchema);
 
     if (!form.valid) return fail(400, { form });
-
+    
+    const { pb } = locals
     const { email, username } = form.data
     const lowercaseEmail = email.toLowerCase()
-    const { pb } = locals
 
     const matchingUsernameUsers = await pb.collection('users').getFullList({ filter: `username="${username}"` })
     if (matchingUsernameUsers.length > 0) {
@@ -50,6 +51,6 @@ export const actions = {
       return setError(form, "username", ERROR_MESSAGES.GENERIC)
     }
 
-    throw redirect(303, '/login');
+    return { form }
   }
 };

@@ -11,6 +11,7 @@ export const ERROR_MESSAGES = {
 			INVALID: 'Invalid email',
 			NOT_FOUND: 'An account with this email does not exist',
 			UNIQUE: 'Email must be unique',
+			VERIFY: 'You must verify your email before you can login'
 		},
 		PASSWORD: {
 			REQUIRED: 'Password is required',
@@ -22,5 +23,13 @@ export const ERROR_MESSAGES = {
 		INVALID_CREDENTIALS: 'Invalid email or password',
 	},
 	GENERIC: 'An unexpected error has occured',
+}
+
+export const SUCCESS_MESSAGES = {
+	AUTH: {
+		PASSWORD: {
+			RESET: "An email has been sent to reset your password"
+		}
+	}
 }
 

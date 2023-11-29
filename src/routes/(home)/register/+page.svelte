@@ -3,17 +3,11 @@
 	import Button from '$lib/components/common/Button.svelte'
 	import Input from '$lib/components/common/Input.svelte'
 	import PasswordInput from '$lib/components/common/PasswordInput.svelte'
-	import { goto } from '$app/navigation'
 
 	let { data } = $props()
 
 	const { form, errors, constraints, enhance, submitting } = superForm(data.form, {
 		taintedMessage: null,
-		onUpdated({ form }) {
-			if (form.valid) {
-				goto('/login')
-			}
-		},
 	})
 </script>
 
@@ -36,9 +30,9 @@
 		/>
 	</div>
 	<div class="space-y-2">
-		<Button type="submit" label="Register" submitting={$submitting} />
-		<div class="flex flex-row justify-center w-full gap-x-2">
-			<p>Already created an account?</p>
+		<Button type="submit" label="Register" color="darkblue" submitting={$submitting} />
+		<div class="flex flex-row justify-center w-full text-sm gap-x-2 md:text-base">
+			<p>Already have an account?</p>
 			<a
 				href="/login"
 				class="text-blue-main hover:cursor-pointer hover:underline decoration-blue-main underline-offset-1"

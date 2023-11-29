@@ -1,5 +1,5 @@
-import type { AuthModel } from "pocketbase";
+import type { PocketbaseError } from '$lib/types'
 
-export function serializeNonPOJOs<T>(obj: T) {
-  return structuredClone(obj)
+export function isPocketbaseError(e: unknown): e is PocketbaseError {
+  return !!(e as PocketbaseError).url
 }

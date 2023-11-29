@@ -1,12 +1,10 @@
-import { goto } from "$app/navigation";
+import { redirect } from "@sveltejs/kit";
 import type { PageLoad } from "./$types";
-
-export const ssr = false;
 
 export function entries() {
   return [{ path: "path" }];
 }
 
 export const load = (() => {
-  goto("/login", { replaceState: true });
+  throw redirect(303, '/login')
 }) satisfies PageLoad;

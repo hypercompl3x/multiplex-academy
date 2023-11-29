@@ -9,7 +9,7 @@
 	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
 </script>
 
-<form method="POST" class="space-y-8" use:enhance novalidate>
+<form method="POST" use:enhance novalidate>
 	<div class="space-y-6">
 		<Input name="email" label="Email" bind:value={$form.email} error={$errors.email?.[0]} {...$constraints.email} />
 		<PasswordInput
@@ -20,9 +20,15 @@
 			{...$constraints.password}
 		/>
 	</div>
-	<div class="space-y-2">
-		<Button type="submit" label="Sign In" submitting={$submitting} />
-		<div class="flex flex-row justify-center w-full gap-x-2">
+	<a
+		href="/forgot-password"
+		class="block ml-auto md:leading-4 leading-4 text-blue-main hover:cursor-pointer hover:underline decoration-blue-main underline-offset-1 w-fit mt-0.5 md:text-base text-sm"
+	>
+		Forgot password?
+	</a>
+	<div class="mt-5 space-y-2">
+		<Button type="submit" label="Sign In" color="darkblue" submitting={$submitting} />
+		<div class="flex flex-row justify-center w-full text-sm gap-x-2 md:text-base">
 			<p>Don't have an account?</p>
 			<a
 				href="/register"

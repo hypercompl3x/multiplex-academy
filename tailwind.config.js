@@ -3,7 +3,6 @@ export default {
   content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
     colors: {
-      black: "#000",
       white: "#fff",
       blue: {
         main: "#1A2779",
@@ -17,6 +16,10 @@ export default {
       },
       red: {
         main: "#C73636"
+      },
+      green: {
+        main: "#5DB67B",
+        dark: "#306943"
       }
     }
   },

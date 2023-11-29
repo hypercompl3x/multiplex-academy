@@ -12,4 +12,4 @@
 	})
 </script>
 
-<div id="particles" class="hidden w-full h-full bg-blue-dark sm:block" />
+<div id="particles" class="hidden w-full h-full bg-blue-dark md:block" />

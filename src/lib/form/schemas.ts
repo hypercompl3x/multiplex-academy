@@ -5,13 +5,6 @@ const passwordRegex = /^(?=.*[!@#$%^&*])/
 
 const { EMAIL, PASSWORD, USERNAME } = ERROR_MESSAGES.AUTH
 
-export const loginUserSchema = z.object({
-	email: z.string({ required_error: EMAIL.REQUIRED }).min(1, EMAIL.REQUIRED).email(EMAIL.INVALID),
-	password: z.string({ required_error: PASSWORD.REQUIRED }).min(1, PASSWORD.REQUIRED),
-})
-
-export type LoginUserSchema = z.infer<typeof loginUserSchema>
-
 export const registerUserSchema = z
 	.object({
 		username: z.string().min(1, USERNAME.REQUIRED).max(50, USERNAME.MAX_LENGTH),
@@ -24,4 +17,9 @@ export const registerUserSchema = z
 			.regex(passwordRegex, PASSWORD.SPECIAL),
 	})
 
-export type RegisterUserSchema = z.infer<typeof registerUserSchema>
+export const loginUserSchema = z.object({
+	email: z.string({ required_error: EMAIL.REQUIRED }).min(1, EMAIL.REQUIRED).email(EMAIL.INVALID),
+	password: z.string({ required_error: PASSWORD.REQUIRED }).min(1, PASSWORD.REQUIRED),
+})
+
+export const forgotPasswordSchema = loginUserSchema.omit({ password: true })

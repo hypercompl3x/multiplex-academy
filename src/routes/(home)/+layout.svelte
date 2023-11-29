@@ -4,7 +4,7 @@
 </script>
 
 <div class="flex flex-row h-screen">
-	<div class="flex flex-col items-center justify-center w-full h-full sm:max-w-xl gap-y-8">
+	<div class="flex flex-col items-center justify-center w-full h-full md:max-w-xl gap-y-8">
 		<Logo />
 		<slot />
 	</div>

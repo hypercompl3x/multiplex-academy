@@ -11,7 +11,7 @@ export const ERROR_MESSAGES = {
 			INVALID: 'Invalid email',
 			NOT_FOUND: 'An account with this email does not exist',
 			UNIQUE: 'Email must be unique',
-			VERIFY: 'You must verify your email before you can login'
+			VERIFY: 'Please verify your email to login'
 		},
 		PASSWORD: {
 			REQUIRED: 'Password is required',

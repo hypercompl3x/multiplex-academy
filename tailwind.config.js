@@ -9,7 +9,8 @@ export default {
         dark: "#050819"
       },
       ice: {
-        main: "#92DCE5"
+        main: "#92DCE5",
+        light: "#C5ECF1"
       },
       orange: {
         main: "#E8B94D"

@@ -50,7 +50,7 @@
 		Forgot password?
 	</a>
 	<div class="mt-5 space-y-2">
-		<Button type="submit" label="Sign In" color="darkblue" submitting={$submitting} />
+		<Button type="submit" label="Sign In" color="darkblue" submitting={$submitting} disabled={$submitting} />
 		<div class="flex flex-row justify-center w-full text-sm gap-x-2 md:text-base">
 			<p>Don't have an account?</p>
 			<a

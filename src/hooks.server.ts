@@ -1,10 +1,10 @@
 import type { Handle } from '@sveltejs/kit'
 import PocketBase from 'pocketbase'
-import { POCKETBASE_API } from '$env/static/private';
+import { VITE_POCKETBASE_API } from '$env/static/private';
 import type { PocketbaseUser } from '$lib/types';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  event.locals.pb = new PocketBase(POCKETBASE_API)
+  event.locals.pb = new PocketBase(VITE_POCKETBASE_API)
   event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
 
   try {

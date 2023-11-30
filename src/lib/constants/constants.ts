@@ -22,6 +22,13 @@ export const ERROR_MESSAGES = {
 		},
 		INVALID_CREDENTIALS: 'Invalid email or password',
 	},
+	PROFILE: {
+		AVATAR: {
+			SIZE: 'Avatar must be 5mb or less',
+			FORMAT: 'Avatar must be an image',
+			FILE: 'Avatar must be a valid file',
+		},
+	},
 	GENERIC: 'An unexpected error has occured',
 }
 

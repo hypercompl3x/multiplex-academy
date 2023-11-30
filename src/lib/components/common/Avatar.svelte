@@ -5,7 +5,7 @@
 	}
 
 	type Props = {
-		src: string
+		src?: string
 		username: string
 		size: keyof typeof SIZES
 	}

@@ -22,3 +22,7 @@ export function clickOutside(element: HTMLDivElement, callbackFunction: () => vo
     }
   }
 }
+
+export function getImageURL(collectionId: string, recordId: string, fileName: string, size = '0x0') {
+	return `${import.meta.env.VITE_POCKETBASE_API}/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
+}

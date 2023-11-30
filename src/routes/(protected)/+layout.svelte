@@ -1,8 +1,14 @@
 <script lang="ts">
+	import AvatarDropdown from '$lib/components/navigation/AvatarDropdown.svelte'
+	import NavLink from '$lib/components/navigation/NavLink.svelte'
 	import Logo from '$lib/components/svgs/Logo.svelte'
-	import { untrack } from 'svelte'
 
-	const navigationItems = [{ href: '/browse-courses', label: 'Browse Courses' }]
+	const navigationLinks = [
+		{ href: '/my-courses', label: 'My Courses' },
+		{ href: '/browse-courses', label: 'Browse Courses' },
+	]
+
+	let { data } = $props()
 
 	let scrollbarAtTop = $state(true)
 
@@ -11,30 +17,31 @@
 	}
 
 	$effect(() => {
-		untrack(() => {
-			scrollbarAtTop = window.scrollY === 0
-			window.addEventListener('scroll', handleScroll)
-		})
+		handleScroll()
+		window.addEventListener('scroll', handleScroll)
 
 		return () => window.removeEventListener('scroll', handleScroll)
 	})
 </script>
 
 <nav
-	class="box-content fixed flex items-center justify-center w-full h-20 gap-x-8 {scrollbarAtTop
-		? 'bg-ice-light'
-		: 'bg-white border-visible'} nav"
+	class="box-content fixed flex items-center justify-evenly w-full h-20 gap-x-8 {scrollbarAtTop
+		? ''
+		: 'bg-white animate-border'} nav"
 >
-	<a href="/" class="group w-fit">
-		<div class="w-60">
-			<Logo />
-		</div>
-	</a>
-	{#each navigationItems as { href, label }}
-		<a {href} class="text-lg hover:text-blue-main">{label}</a>
-	{/each}
+	<div class="flex items-center gap-x-8">
+		<a href="/" class="group w-fit">
+			<div class="w-60">
+				<Logo />
+			</div>
+		</a>
+		{#each navigationLinks as { href, label } (`nav-${label}`)}
+			<NavLink type="link" {label} {href} />
+		{/each}
+	</div>
+	<AvatarDropdown src={''} username={data.user.username} />
 </nav>
-<div class="flex-1 mt-20 bg-ice-light">
+<div class="flex-1 pt-20 bg-ice-light">
 	<slot />
 </div>
 
@@ -46,7 +53,7 @@
 			background-color 0.25s ease;
 	}
 
-	.border-visible {
+	.animate-border {
 		border-bottom-color: #050819;
 	}
 </style>

@@ -2,7 +2,6 @@ import { fail, redirect } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms/server';
 import type { PageServerLoad } from './$types.js';
 import { loginUserSchema } from '$lib/form/schemas';
-
 import { ERROR_MESSAGES } from '$lib/constants/constants.js';
 import { isPocketbaseError } from '$lib/utils.js';
 

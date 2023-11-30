@@ -23,3 +23,31 @@ export const loginUserSchema = z.object({
 })
 
 export const forgotPasswordSchema = loginUserSchema.omit({ password: true })
+
+export const profileSchema = z.object({
+	username: z.string().min(1, USERNAME.REQUIRED).max(50, USERNAME.MAX_LENGTH),
+	avatar: z.any().optional().superRefine((avatar, ctx) => {
+		// if (avatar && avatar.name) {
+		// 	if (!(avatar instanceof File)) {
+		// 		setError(form, 'avatar', AVATAR.FILE)
+		// 		return
+		// 	}
+
+		// 	if (avatar.size > 5000000) {
+		// 		setError(form, 'avatar', AVATAR.SIZE)
+		// 		return
+		// 	}
+
+		// 	if (avatar.type !== 'image/jpeg' && avatar.type !== 'image/png' && avatar.type !== 'image/jpg') {
+		// 		setError(form, 'avatar', AVATAR.FORMAT)
+		// 		return
+		// 	}
+		// }
+
+		// ctx.addIssue({
+		// 	path: ['username'],
+		// 	code: 'custom',
+		// 	message: ERROR_MESSAGES.GENERIC,
+		// })
+	}),
+})

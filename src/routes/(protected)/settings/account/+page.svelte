@@ -1,0 +1,7 @@
+<script lang="ts">
+	let { data } = $props()
+
+	console.log(data)
+</script>
+
+<h1 class="text-2xl font-bold">Account Settings</h1>

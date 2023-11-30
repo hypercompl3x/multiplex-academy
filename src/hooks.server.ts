@@ -1,13 +1,16 @@
 import type { Handle } from '@sveltejs/kit'
 import PocketBase from 'pocketbase'
+import { POCKETBASE_API } from '$env/static/private';
+import type { PocketbaseUser } from '$lib/types';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  event.locals.pb = new PocketBase('http://127.0.0.1:8090')
+  event.locals.pb = new PocketBase(POCKETBASE_API)
   event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
 
   try {
     if (event.locals.pb.authStore.isValid) {
       await event.locals.pb.collection("users").authRefresh()
+      event.locals.user = event.locals.pb.authStore.model as PocketbaseUser
     }
   } catch (_) {
     event.locals.pb.authStore.clear()

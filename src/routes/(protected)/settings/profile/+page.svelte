@@ -13,8 +13,8 @@
 	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
 
 	$effect(() => {
+		console.log('form', $form)
 		console.log('avatar', avatar)
-		console.log($form)
 	})
 
 	function onFileUpload(e: { target: EventTarget | null }) {
@@ -43,12 +43,12 @@
 		<label for="avatar" class="block mx-auto w-fit">Profile Picture</label>
 		<div class="relative">
 			<Avatar
+				src={!$form.avatar
+					? undefined
+					: typeof $form.avatar === 'string'
+					  ? getImageURL(collectionId, id, $form.avatar)
+					  : URL.createObjectURL($form.avatar)}
 				size={28}
-				src={$form.avatar && typeof $form.avatar !== 'string'
-					? URL.createObjectURL($form.avatar)
-					: avatar && $form.fileExists === 'yes'
-					  ? getImageURL(collectionId, id, avatar)
-					  : undefined}
 				username={$form.username}
 			/>
 			<label
@@ -57,7 +57,7 @@
 			>
 				<Pen />
 			</label>
-			{#if $form.fileExists === 'yes'}
+			{#if $form.avatar}
 				<button
 					type="button"
 					class="box-content absolute w-4 p-2 rounded-full -right-0.5 -bottom-0.5 bg-red-main cursor-pointer"

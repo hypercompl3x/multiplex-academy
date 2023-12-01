@@ -20,54 +20,39 @@ export const actions = {
     const formData = await request.formData()
     const form = await superValidate(formData, profileSchema);
 
-    console.log(form)
-
     if (!form.valid) {
       return fail(400, { form });
     }
 
     const { username, fileExists } = form.data
-    const avatar = formData.get('avatar') as File || null
+    const avatar = formData.get('avatar') as File
 
-    console.log("AVATAR", avatar)
+    const newData = fileExists === "yes" && avatar.size === 0 ? { username } : fileExists === "yes" ? { username, avatar } : { username, avatar: null }
 
-    if (avatar.size === 0 && fileExists === "no") {
-      try {
-        const {username: newUsername, avatar: newAvatar} = await locals.pb
-          .collection('users')
-          .update(locals?.user?.id, { username, avatar: null });
-        locals.user.username = newUsername;
-			  locals.user.avatar = newAvatar;
-      } catch (e) {
-        console.log("Error:", e)
-        return setError(form, "username", ERROR_MESSAGES.GENERIC)
+    if (avatar.size > 0) {
+      if (!(avatar instanceof File)) {
+        setError(form, 'avatar', AVATAR.FILE)
+        return setError(form, "avatar", ERROR_MESSAGES.GENERIC)
       }
-      return { form };
+  
+      if (avatar.size > 5000000) {
+        return setError(form, 'avatar', AVATAR.SIZE)
+      }
+  
+      if (avatar.type !== 'image/jpeg' && avatar.type !== 'image/png' && avatar.type !== 'image/jpg') {
+        return setError(form, 'avatar', AVATAR.FORMAT)
+      }
     }
-
-    if (!(avatar instanceof File)) {
-      setError(form, 'avatar', AVATAR.FILE)
-      return setError(form, "avatar", ERROR_MESSAGES.GENERIC)
-    }
-
-    if (avatar.size > 5000000) {
-      return setError(form, 'avatar', AVATAR.SIZE)
-    }
-
-    if (avatar.type !== 'image/jpeg' && avatar.type !== 'image/png' && avatar.type !== 'image/jpg') {
-      return setError(form, 'avatar', AVATAR.FORMAT)
-    }
-
     try {
-      const { username: newUsername, avatar: newAvatar } = await locals.pb
+      const data = await locals.pb
         .collection('users')
-        .update(locals?.user?.id, { username, avatar });
-      locals.user.username = newUsername;
-			locals.user.avatar = newAvatar;
+        .update(locals?.user?.id, newData);
+        locals.user.avatar = data.avatar
+        locals.user.username = data.username
+      return { form: {...form, data: {...form.data, avatar: data.avatar, fileExists }} }
     } catch (e) {
       console.log("Error:", e)
       return setError(form, "username", ERROR_MESSAGES.GENERIC)
     }
-    return { form };
   }
 };

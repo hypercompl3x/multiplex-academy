@@ -23,6 +23,7 @@ export const loginUserSchema = z.object({
 })
 
 export const forgotPasswordSchema = loginUserSchema.omit({ password: true })
+export const accountSchema = loginUserSchema.omit({ password: true })
 
 const fileExistsOptions = ["yes", "no"] as const
 

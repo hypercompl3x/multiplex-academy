@@ -19,7 +19,7 @@
 			  : URL.createObjectURL(selectedAvatar),
 	)
 
-	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
+	const { form, errors, constraints, enhance, submitting, message } = superForm(data.form, { taintedMessage: null })
 
 	function onFileUpload(e: { target: EventTarget | null }) {
 		const target = e.target as HTMLInputElement
@@ -41,7 +41,10 @@
 	}
 </script>
 
-<h1 class="text-2xl font-bold">Profile Settings</h1>
+<div class="flex items-center gap-x-7">
+	<h1 class="text-2xl font-bold">Profile Settings</h1>
+	<p class="text-lg font-semibold text-green-main">{$message}</p>
+</div>
 <div class="w-full h-px my-3 bg-blue-dark/30" />
 <form method="POST" use:enhance novalidate enctype="multipart/form-data" class="flex gap-x-8">
 	<div>

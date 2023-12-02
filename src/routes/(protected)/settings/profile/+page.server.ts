@@ -1,8 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { setError, superValidate } from 'sveltekit-superforms/server';
+import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
 import type { PageServerLoad } from './$types.js';
 import { profileSchema } from '$lib/form/schemas';
-import { ERROR_MESSAGES } from '$lib/constants/constants.js';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '$lib/constants/constants.js';
 
 const { AVATAR } = ERROR_MESSAGES.PROFILE
 
@@ -53,6 +53,6 @@ export const actions = {
       return setError(form, "username", ERROR_MESSAGES.GENERIC)
     }
 
-    return { form }
+    return setMessage(form, SUCCESS_MESSAGES.PROFILE)
   }
 };

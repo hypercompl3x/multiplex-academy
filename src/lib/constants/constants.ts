@@ -36,6 +36,9 @@ export const SUCCESS_MESSAGES = {
 	AUTH: {
 		NEW_ACCOUNT: "Confirm your email before logging in",
 		PASSWORD_REST: "An email has been sent to reset your password"
-	}
+	},
+	PROFILE: "Profile updated successfully",
+	ACCOUNT: "Please confirm your email to change email address",
+	SECURITY: ""
 }
 

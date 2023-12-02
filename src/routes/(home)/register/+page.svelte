@@ -37,6 +37,13 @@
 			error={$errors.password?.[0]}
 			{...$constraints.password}
 		/>
+		<PasswordInput
+			name="passwordConfirm"
+			label="Confirm Password"
+			bind:value={$form.passwordConfirm}
+			error={$errors.passwordConfirm?.[0]}
+			{...$constraints.passwordConfirm}
+		/>
 	</div>
 	<div class="space-y-2">
 		<Button type="submit" label="Register" color="darkblue" submitting={$submitting} disabled={$submitting} />

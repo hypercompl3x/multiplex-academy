@@ -39,7 +39,6 @@ export const actions = {
     const data = {
       ...form.data,
       email: lowercaseEmail,
-      passwordConfirm: form.data.password,
       emailVisibility: true,
     }
   

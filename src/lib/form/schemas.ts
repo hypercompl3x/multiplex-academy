@@ -15,6 +15,12 @@ export const registerUserSchema = z
 			.min(8, PASSWORD.MIN_LENGTH)
 			.max(50, PASSWORD.MAX_LENGTH)
 			.regex(passwordRegex, PASSWORD.SPECIAL),
+			passwordConfirm: z
+			.string()
+			.min(1, PASSWORD.REQUIRED)
+	}).refine(data => data.password === data.passwordConfirm, {
+		message: PASSWORD.MATCH,
+		path: ["password"]
 	})
 
 export const loginUserSchema = z.object({

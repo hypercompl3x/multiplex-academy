@@ -26,7 +26,7 @@
 {#if message.value}
 	<div
 		transition:fade={{ duration: 300 }}
-		class="absolute flex flex-row items-center p-2 rounded-md bg-green-light/20 -top-12 whitespace-nowrap gap-x-2"
+		class="absolute flex flex-row items-center p-2 rounded-md bg-green-light/20 -top-16 whitespace-nowrap gap-x-2"
 	>
 		<div class="text-lg text-green-main">{message.value}</div>
 		<button type="button" class="w-3.5" onclick={() => message.remove()}><X /></button>

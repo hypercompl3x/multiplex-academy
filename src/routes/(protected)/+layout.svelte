@@ -41,7 +41,7 @@
 	</div>
 	<AvatarDropdown src={''} username={data.user.username} />
 </nav>
-<div class="flex-1 pt-20 bg-ice-light">
+<div class="flex-1 pt-20 bg-grey-light">
 	<slot />
 </div>
 

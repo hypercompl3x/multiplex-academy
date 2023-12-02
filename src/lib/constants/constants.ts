@@ -19,6 +19,7 @@ export const ERROR_MESSAGES = {
 			MAX_LENGTH: 'Password must be less than 50 characters',
 			MATCH: 'Passwords must match',
 			SPECIAL: 'Password must contain at least 1 special character',
+			OLD_INVALID: 'Invalid old password'
 		},
 		INVALID_CREDENTIALS: 'Invalid email or password',
 	},
@@ -39,6 +40,6 @@ export const SUCCESS_MESSAGES = {
 	},
 	PROFILE: "Profile updated successfully",
 	ACCOUNT: "Please confirm your email to change email address",
-	SECURITY: ""
+	SECURITY: "Password updated successfully"
 }
 

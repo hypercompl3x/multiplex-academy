@@ -15,7 +15,7 @@ export const registerUserSchema = z
 			.min(8, PASSWORD.MIN_LENGTH)
 			.max(50, PASSWORD.MAX_LENGTH)
 			.regex(passwordRegex, PASSWORD.SPECIAL),
-			passwordConfirm: z
+		passwordConfirm: z
 			.string()
 			.min(1, PASSWORD.REQUIRED)
 	}).refine(data => data.password === data.passwordConfirm, {
@@ -29,7 +29,6 @@ export const loginUserSchema = z.object({
 })
 
 export const forgotPasswordSchema = loginUserSchema.omit({ password: true })
-export const accountSchema = loginUserSchema.omit({ password: true })
 
 const fileExistsOptions = ["yes", "no"] as const
 
@@ -37,3 +36,25 @@ export const profileSchema = z.object({
 	username: z.string().min(1, USERNAME.REQUIRED).max(50, USERNAME.MAX_LENGTH),
 	fileExists: z.enum(fileExistsOptions)
 })
+
+export const accountSchema = loginUserSchema.omit({ password: true })
+
+export const securitySchema = z
+	.object({
+		oldPassword: z
+		.string()
+		.min(1, PASSWORD.REQUIRED),
+		password: z
+			.string()
+			.min(1, PASSWORD.REQUIRED)
+			.min(8, PASSWORD.MIN_LENGTH)
+			.max(50, PASSWORD.MAX_LENGTH)
+			.regex(passwordRegex, PASSWORD.SPECIAL),
+		passwordConfirm: z
+			.string()
+			.min(1, PASSWORD.REQUIRED)
+	}).refine(data => data.password === data.passwordConfirm, {
+		message: PASSWORD.MATCH,
+		path: ["password"]
+	})
+

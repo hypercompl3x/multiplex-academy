@@ -10,26 +10,31 @@
 	let { data } = $props()
 	const { collectionId, id, avatar } = data.user
 
-	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
+	let selectedAvatar = $state<File | string | undefined>(avatar === '' ? undefined : avatar)
+	let src = $derived(
+		!selectedAvatar
+			? undefined
+			: typeof selectedAvatar === 'string'
+			  ? getImageURL(collectionId, id, selectedAvatar)
+			  : URL.createObjectURL(selectedAvatar),
+	)
 
-	$effect(() => {
-		console.log('form', $form)
-		console.log('avatar', avatar)
-	})
+	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
 
 	function onFileUpload(e: { target: EventTarget | null }) {
 		const target = e.target as HTMLInputElement
+		if (!target?.files) return
+
+		selectedAvatar = target.files[0]
 		form.update($form => {
-			if (!target?.files) return $form
-			$form.avatar = target.files[0]
 			$form.fileExists = 'yes'
 			return $form
 		})
 	}
 
 	function removeImage() {
+		selectedAvatar = undefined
 		form.update($form => {
-			$form.avatar = ''
 			$form.fileExists = 'no'
 			return $form
 		})
@@ -42,22 +47,14 @@
 	<div>
 		<label for="avatar" class="block mx-auto w-fit">Profile Picture</label>
 		<div class="relative">
-			<Avatar
-				src={!$form.avatar
-					? undefined
-					: typeof $form.avatar === 'string'
-					  ? getImageURL(collectionId, id, $form.avatar)
-					  : URL.createObjectURL($form.avatar)}
-				size={28}
-				username={$form.username}
-			/>
+			<Avatar {src} size={28} username={$form.username} />
 			<label
 				for="avatar"
 				class="box-content absolute w-4 p-2 rounded-full -left-0.5 -bottom-0.5 bg-green-main cursor-pointer"
 			>
 				<Pen />
 			</label>
-			{#if $form.avatar}
+			{#if selectedAvatar}
 				<button
 					type="button"
 					class="box-content absolute w-4 p-2 rounded-full -right-0.5 -bottom-0.5 bg-red-main cursor-pointer"

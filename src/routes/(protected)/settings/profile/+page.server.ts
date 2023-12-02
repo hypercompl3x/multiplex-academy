@@ -11,7 +11,7 @@ export const load: PageServerLoad = (async ({ locals }) => {
 		throw redirect(303, '/login');
 	}
 
-  const form = await superValidate({ ...locals.user, fileExists: locals.user.avatar ? "yes" : "no" }, profileSchema);
+  const form = await superValidate({ username: locals.user.username, fileExists: locals.user.avatar ? "yes" : "no" }, profileSchema);
   return { form };
 });
 
@@ -27,20 +27,19 @@ export const actions = {
     const { username, fileExists } = form.data
     const avatar = formData.get('avatar') as File
 
-    const newData = fileExists === "yes" && avatar.size === 0 ? { username } : fileExists === "yes" ? { username, avatar } : { username, avatar: null }
+    const newData = fileExists === "yes" && avatar.size === 0 ? { username } : { username, avatar: fileExists === "yes" ? avatar : null }
 
     if (avatar.size > 0) {
       if (!(avatar instanceof File)) {
-        setError(form, 'avatar', AVATAR.FILE)
-        return setError(form, "avatar", ERROR_MESSAGES.GENERIC)
+        return setError(form, 'username', AVATAR.FILE)
       }
   
       if (avatar.size > 5000000) {
-        return setError(form, 'avatar', AVATAR.SIZE)
+        return setError(form, 'username', AVATAR.SIZE)
       }
   
       if (avatar.type !== 'image/jpeg' && avatar.type !== 'image/png' && avatar.type !== 'image/jpg') {
-        return setError(form, 'avatar', AVATAR.FORMAT)
+        return setError(form, 'username', AVATAR.FORMAT)
       }
     }
     try {
@@ -49,10 +48,11 @@ export const actions = {
         .update(locals?.user?.id, newData);
         locals.user.avatar = data.avatar
         locals.user.username = data.username
-      return { form: {...form, data: {...form.data, avatar: data.avatar, fileExists }} }
     } catch (e) {
       console.log("Error:", e)
       return setError(form, "username", ERROR_MESSAGES.GENERIC)
     }
+
+    return { form }
   }
 };

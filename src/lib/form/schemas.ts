@@ -28,6 +28,5 @@ const fileExistsOptions = ["yes", "no"] as const
 
 export const profileSchema = z.object({
 	username: z.string().min(1, USERNAME.REQUIRED).max(50, USERNAME.MAX_LENGTH),
-	avatar: z.any(),
 	fileExists: z.enum(fileExistsOptions)
 })

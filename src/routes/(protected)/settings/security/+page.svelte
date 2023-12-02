@@ -2,8 +2,6 @@
 	import { superForm } from 'sveltekit-superforms/client'
 	import Button from '$lib/components/common/Button.svelte'
 	import PasswordInput from '$lib/components/common/PasswordInput.svelte'
-	import { message } from '$lib/state/runes.svelte.js'
-	import { SUCCESS_MESSAGES } from '$lib/constants/constants.js'
 
 	let { data } = $props()
 

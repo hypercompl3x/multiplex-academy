@@ -21,7 +21,7 @@
 </script>
 
 <form method="POST" class="space-y-8" use:enhance novalidate>
-	<div class="space-y-6">
+	<div class="space-y-8 sm:space-y-6">
 		<Input
 			name="username"
 			label="Username"

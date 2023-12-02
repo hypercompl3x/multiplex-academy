@@ -3,6 +3,7 @@ import { setError, setMessage, superValidate } from 'sveltekit-superforms/server
 import type { PageServerLoad } from './$types.js';
 import { accountSchema } from '$lib/form/schemas';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '$lib/constants/constants.js';
+import { isPocketbaseError } from '$lib/utils.js';
 
 const { EMAIL } = ERROR_MESSAGES.AUTH
 
@@ -35,6 +36,9 @@ export const actions = {
     try {
 			await locals.pb.collection('users').requestEmailChange(lowercaseEmail)
 		} catch (e) {
+      if (isPocketbaseError(e) && e?.response?.code === 400) {
+        return setError(form, "email", ERROR_MESSAGES.AUTH.EMAIL.NOT_FOUND)
+      }
       console.log("Error:", e)
       return setError(form, "email", ERROR_MESSAGES.GENERIC)
     }

@@ -23,7 +23,7 @@
 </script>
 
 <button
-	class="{COLORS[color]} flex items-center justify-center h-10 text-xl font-semibold text-white rounded-md w-72"
+	class="{COLORS[color]} flex items-center justify-center h-10 text-xl font-semibold text-white rounded-md w-60 sm:w-72"
 	{...rest}
 >
 	{#if submitting}

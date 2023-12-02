@@ -19,7 +19,9 @@
 			  : URL.createObjectURL(selectedAvatar),
 	)
 
-	const { form, errors, constraints, enhance, submitting, message } = superForm(data.form, { taintedMessage: null })
+	const { form, errors, constraints, enhance, submitting, message } = superForm(data.form, {
+		taintedMessage: null,
+	})
 
 	function onFileUpload(e: { target: EventTarget | null }) {
 		const target = e.target as HTMLInputElement
@@ -41,15 +43,21 @@
 	}
 </script>
 
-<div class="flex items-center gap-x-7">
+<div class="flex flex-col md:items-center md:flex-row gap-x-7">
 	<h1 class="text-2xl font-bold">Profile Settings</h1>
 	<p class="text-lg font-semibold text-green-main">{$message}</p>
 </div>
 <div class="w-full h-px my-3 bg-blue-dark/30" />
-<form method="POST" use:enhance novalidate enctype="multipart/form-data" class="flex gap-x-8">
+<form
+	method="POST"
+	use:enhance
+	novalidate
+	enctype="multipart/form-data"
+	class="flex flex-col sm:flex-row gap-x-8 gap-y-4"
+>
 	<div>
-		<label for="avatar" class="block mx-auto w-fit">Profile Picture</label>
-		<div class="relative">
+		<label for="avatar" class="block sm:mx-auto w-fit">Profile Picture</label>
+		<div class="relative w-fit">
 			<Avatar {src} size={28} username={$form.username} />
 			<label
 				for="avatar"
@@ -78,7 +86,7 @@
 			<input name="fileExists" type="hidden" bind:value={$form.fileExists} />
 		</div>
 	</div>
-	<div class="flex flex-col justify-between py-2">
+	<div class="flex flex-col justify-center gap-y-6">
 		<Input
 			name="username"
 			label="Username"

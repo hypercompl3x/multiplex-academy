@@ -2,6 +2,7 @@
 	import AvatarDropdown from '$lib/components/navigation/AvatarDropdown.svelte'
 	import NavLink from '$lib/components/navigation/NavLink.svelte'
 	import Logo from '$lib/components/svgs/Logo.svelte'
+	import { getImageURL } from '$lib/utils.js'
 
 	const navigationLinks = [
 		{ href: '/my-courses', label: 'My Courses' },
@@ -9,6 +10,7 @@
 	]
 
 	let { data } = $props()
+	let { collectionId, id, avatar, username } = $derived(data.user)
 
 	let scrollbarAtTop = $state(true)
 
@@ -39,7 +41,7 @@
 			<NavLink type="link" {label} {href} />
 		{/each}
 	</div>
-	<AvatarDropdown src={''} username={data.user.username} />
+	<AvatarDropdown src={avatar ? getImageURL(collectionId, id, avatar) : undefined} {username} />
 </nav>
 <div class="flex-1 pt-20 bg-grey-light">
 	<slot />

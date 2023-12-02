@@ -17,7 +17,7 @@
 
 	type Props = {
 		username: string
-		src: string
+		src?: string
 	}
 
 	let { username, src } = $props<Props>()

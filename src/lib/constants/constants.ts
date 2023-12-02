@@ -40,6 +40,5 @@ export const SUCCESS_MESSAGES = {
 	},
 	PROFILE: "Profile updated successfully",
 	ACCOUNT: "Please confirm your email to change email address",
-	SECURITY: "Password updated successfully"
 }
 

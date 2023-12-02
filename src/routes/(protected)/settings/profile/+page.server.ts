@@ -45,9 +45,9 @@ export const actions = {
     try {
       const data = await locals.pb
         .collection('users')
-        .update(locals?.user?.id, newData);
-        locals.user.avatar = data.avatar
-        locals.user.username = data.username
+        .update(locals.user.id, newData);
+      locals.user.avatar = data.avatar
+      locals.user.username = data.username
     } catch (e) {
       console.log("Error:", e)
       return setError(form, "username", ERROR_MESSAGES.GENERIC)

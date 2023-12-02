@@ -8,7 +8,7 @@
 	const { form, errors, constraints, enhance, submitting, message } = superForm(data.form, { taintedMessage: null })
 </script>
 
-<div class="flex items-center gap-x-7">
+<div class="flex flex-col md:items-center md:flex-row gap-x-7">
 	<h1 class="text-2xl font-bold">Account Settings</h1>
 	<p class="text-lg font-semibold text-green-main">{$message}</p>
 </div>

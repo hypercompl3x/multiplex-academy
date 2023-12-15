@@ -8,7 +8,7 @@ const { EMAIL, USERNAME } = ERROR_MESSAGES.AUTH
 
 export const load: PageServerLoad = (async ({locals}) => {
   if (locals.pb.authStore.isValid) {
-		throw redirect(303, '/');
+		redirect(303, '/');
 	}
 
   const form = await superValidate(registerUserSchema);

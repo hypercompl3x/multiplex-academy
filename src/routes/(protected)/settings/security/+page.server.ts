@@ -7,7 +7,7 @@ import { isPocketbaseError } from '$lib/utils.js';
 
 export const load: PageServerLoad = (async ({ locals }) => {
   if (!locals.pb.authStore.isValid) {
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 
   const form = await superValidate(securitySchema);

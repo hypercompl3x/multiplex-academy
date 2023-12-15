@@ -8,7 +8,7 @@ const { AVATAR } = ERROR_MESSAGES.PROFILE
 
 export const load: PageServerLoad = (async ({ locals }) => {
   if (!locals.pb.authStore.isValid || !locals.user) {
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 
   const form = await superValidate({ username: locals.user.username, fileExists: locals.user.avatar ? "yes" : "no" }, profileSchema);

@@ -8,7 +8,7 @@ const { AUTH, GENERIC } = ERROR_MESSAGES
 
 export const load: PageServerLoad = (async ({ locals }) => {
   if (locals.pb.authStore.isValid) {
-		throw redirect(303, '/');
+		redirect(303, '/');
 	}
 
   const form = await superValidate(forgotPasswordSchema);

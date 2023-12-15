@@ -6,5 +6,5 @@ export function entries() {
 }
 
 export const load = (() => {
-  throw redirect(303, '/login')
+  redirect(303, '/login')
 }) satisfies PageLoad;

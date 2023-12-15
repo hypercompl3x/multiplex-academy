@@ -8,7 +8,7 @@ import { isPocketbaseError } from '$lib/utils.js';
 const { EMAIL } = ERROR_MESSAGES.AUTH
 
 export const load: PageServerLoad = (async ({ locals }) => {
-  if (!locals.pb.authStore.isValid) {
+  if (!locals.pb.authStore.isValid || !locals.user) {
 		throw redirect(303, '/login');
 	}
 
@@ -20,9 +20,9 @@ export const actions = {
   default: async ({ request, locals }) => {
     const form = await superValidate(request, accountSchema);
 
-    if (!form.valid) {
-      return fail(400, { form });
-    }
+    if (!form.valid) return fail(400, { form })
+
+    if (!locals.user) return setError(form, "email", ERROR_MESSAGES.GENERIC)
 
     const lowercaseEmail = form.data.email.toLowerCase()
 

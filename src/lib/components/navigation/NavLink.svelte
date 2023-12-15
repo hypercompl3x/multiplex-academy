@@ -10,15 +10,15 @@
 		  }
 
 	type Props = {
-		label: string
+		children: any
 	} & ConditionalProps
 
-	let { ...props } = $props<Props>()
+	let { children, ...props } = $props<Props>()
 	const p = { ...props }
 </script>
 
 {#if p.type === 'button'}
-	<button type="button" onclick={p.onclick} class="text-lg hover:text-blue-main">{p.label}</button>
+	<button type="button" onclick={p.onclick} class="flex items-center text-lg hover:text-blue-main group gap-x-1.5">{@render children()}</button>
 {:else}
-	<a href={p.href} class="text-lg hover:text-blue-main">{p.label}</a>
+	<a href={p.href} class="flex items-center text-lg hover:text-blue-main group gap-x-1.5">{@render children()}</a>
 {/if}

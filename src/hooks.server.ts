@@ -8,12 +8,13 @@ export const handle: Handle = async ({ event, resolve }) => {
   event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
 
   try {
-    if (event.locals.pb.authStore.isValid) {
+    if (event.locals.pb.authStore.isValid && event.locals.pb.authStore.model) {
       await event.locals.pb.collection("users").authRefresh()
       event.locals.user = event.locals.pb.authStore.model as PocketbaseUser
     }
   } catch (_) {
     event.locals.pb.authStore.clear()
+    event.locals.user = null
   }
 
   const response = await resolve(event)

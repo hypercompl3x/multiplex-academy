@@ -7,7 +7,7 @@ import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '$lib/constants/constants.js';
 const { AVATAR } = ERROR_MESSAGES.PROFILE
 
 export const load: PageServerLoad = (async ({ locals }) => {
-  if (!locals.pb.authStore.isValid) {
+  if (!locals.pb.authStore.isValid || !locals.user) {
 		throw redirect(303, '/login');
 	}
 
@@ -42,6 +42,9 @@ export const actions = {
         return setError(form, 'username', AVATAR.FORMAT)
       }
     }
+
+    if (!locals.user) return setError(form, "username", ERROR_MESSAGES.GENERIC)
+
     try {
       const data = await locals.pb
         .collection('users')

@@ -5,11 +5,15 @@ declare global {
   namespace App {
     interface Locals {
       pb: PocketBase
-      user: PocketbaseUser
+      user: PocketbaseUser | null
     }
     // interface PageData {}
     // interface Error {}
     // interface Platform {}
+  }
+
+  interface Window {
+    eval: (value: string) => void
   }
 }
 

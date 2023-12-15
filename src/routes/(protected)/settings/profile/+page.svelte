@@ -19,6 +19,8 @@
 			  : URL.createObjectURL(selectedAvatar),
 	)
 
+	// IMPORTANT NOTE
+	// At the moment in svelte 5 passing data.form here creates an error since this is from the prop rune
 	const { form, errors, constraints, enhance, submitting, message } = superForm(data.form, {
 		taintedMessage: null,
 	})

@@ -36,7 +36,7 @@
 				class="{BASE} {error ? BORDER_ERROR : BORDER_BASE} pr-10"
 			/>
 		{/if}
-		<button type="button" class="absolute inset-y-0 w-6 my-auto right-3" on:click={onEyeClick}>
+		<button type="button" class="absolute inset-y-0 w-6 my-auto right-3" onclick={onEyeClick}>
 			{#if passwordVisible}
 				<Eye />
 			{:else}

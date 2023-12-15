@@ -20,6 +20,7 @@
 <style>
 	.code-image {
 		flex: 1;
+		background-color: black;
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-image: url('$lib/assets/code.jpg');

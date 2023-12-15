@@ -5,22 +5,13 @@
 	import Input from '$lib/components/common/Input.svelte'
 	import PasswordInput from '$lib/components/common/PasswordInput.svelte'
 	import { message } from '$lib/state/runes.svelte'
-	import { untrack } from 'svelte'
 	import X from '$lib/components/svgs/X.svelte'
 
 	let { data } = $props()
 
 	const { form, errors, constraints, enhance, submitting } = superForm(data.form, { taintedMessage: null })
 
-	$effect(() => {
-		untrack(() => {
-			setTimeout(() => {
-				message.remove()
-			}, 3500)
-		})
-
-		return () => message.remove()
-	})
+	$effect(() => message.remove())
 </script>
 
 {#if message.value}
